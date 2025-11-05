@@ -1,0 +1,94 @@
+# tests/test_resume_parse.py
+import asyncio
+from app.services.llm_service import LLMService
+
+
+RAW_TEXT = """JOHN DOE
+Senior Software Engineer
+
+Contact Information:
+Email: john.doe@email.com
+Phone: +1-555-123-4567
+Location: San Francisco, CA
+LinkedIn: linkedin.com/in/johndoe
+GitHub: github.com/johndoe
+
+PROFESSIONAL SUMMARY
+Results-driven Senior Software Engineer with 6+ years of experience in full-stack 
+development. Expertise in Python, cloud architecture, and leading cross-functional 
+teams. Proven track record of delivering scalable solutions that improve performance 
+and user experience.
+
+WORK EXPERIENCE
+
+Senior Software Engineer
+Tech Innovations Inc. | San Francisco, CA
+March 2021 - Present
+- Led development of microservices architecture handling 2M+ daily requests
+- Improved API response time by 45% through optimization and caching strategies
+- Mentored team of 5 junior developers and conducted code reviews
+- Implemented CI/CD pipelines reducing deployment time by 60%
+- Technologies: Python, FastAPI, PostgreSQL, Docker, Kubernetes, AWS
+
+Software Engineer
+Digital Solutions Corp | San Francisco, CA
+June 2019 - February 2021
+- Developed RESTful APIs and web applications using Django and React
+- Built real-time data processing pipeline handling 100K+ events per hour
+- Collaborated with product team to deliver features on tight deadlines
+- Technologies: Python, Django, React, PostgreSQL, Redis, RabbitMQ
+
+Junior Software Developer
+StartUp Labs | San Jose, CA
+January 2018 - May 2019
+- Developed web applications and implemented new features
+- Fixed bugs and improved code quality
+- Technologies: JavaScript, Node.js, MongoDB, Express
+
+EDUCATION
+
+Bachelor of Science in Computer Science
+University of California, Berkeley
+Graduated: May 2018
+GPA: 3.8/4.0
+Relevant Coursework: Data Structures, Algorithms, Database Systems, Web Development
+
+TECHNICAL SKILLS
+
+Programming Languages: Python, JavaScript, Java, Go, SQL
+Frameworks & Libraries: FastAPI, Django, Flask, React, Node.js, Express
+Databases: PostgreSQL, MongoDB, Redis, MySQL
+Cloud & DevOps: AWS (EC2, S3, Lambda, RDS), Docker, Kubernetes, CI/CD, Jenkins
+Tools: Git, GitHub, Jira, Postman, VS Code
+
+SOFT SKILLS
+- Team Leadership & Mentoring
+- Agile/Scrum Methodologies
+- Problem Solving & Critical Thinking
+- Effective Communication
+- Project Management
+
+CERTIFICATIONS
+
+AWS Certified Solutions Architect - Associate
+Amazon Web Services | Issued: June 2023 | Expires: June 2026
+
+Python Professional Certification
+Python Institute | Issued: March 2022
+
+LANGUAGES
+
+English: Native
+Spanish: Professional Working Proficiency
+Mandarin: Elementary Proficiency
+"""
+
+async def main():
+    svc = LLMService()
+    result = await svc.extract_structured_data(RAW_TEXT, "Parse resume into JSON schema.")
+    print("PARSE RESULT:")
+    import json
+    print(json.dumps(result, indent=2, ensure_ascii=False))
+
+if __name__ == "__main__":
+    asyncio.run(main())

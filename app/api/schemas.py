@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr, Field, HttpUrl
 from typing import Optional, List, Dict
 from datetime import datetime, date
 
@@ -55,10 +55,11 @@ class ParsedResumeResponse(BaseModel):
     processed_at: datetime
 
 class UploadResponse(BaseModel):
-    id: str
-    status: str
-    message: str
-    file_name: str
+    id: str = "uuid"
+    status: str = "processing"
+    message: str = "Resume uploaded successfully"
+    estimatedProcessingTime: int = 30
+    webhookUrl: Optional[str] = "optional callback URL"
 
 class JobDescription(BaseModel):
     title: str

@@ -100,6 +100,11 @@ async def get_resume(
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+import uuid
+import logging
+
+logger = logging.getLogger(__name__)
+
 @router.post("/resumes/{resume_id}/match", response_model=MatchingResult)
 async def match_resume(
     resume_id: str,
@@ -116,18 +121,25 @@ async def match_resume(
             
             matcher = JobMatcher()
             result = await matcher.match(resume.parsed_data, job_description.dict())
-            
+
+            # Remove keys from result that we set explicitly to avoid duplicate kwargs
+            result.pop("match_id", None)
+            result.pop("resume_id", None)
+            result.pop("job_title", None)
+
             return MatchingResult(
                 match_id=str(uuid.uuid4()),
                 resume_id=resume_id,
                 job_title=job_description.title,
                 **result
             )
-    
     except HTTPException:
         raise
     except Exception as e:
+        # log full exception for debugging
+        logger.exception("Error matching resume %s: %s", resume_id, e)
         raise HTTPException(status_code=500, detail=str(e))
+
 
 @router.delete("/resumes/{resume_id}")
 async def delete_resume(
