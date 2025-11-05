@@ -1,6 +1,6 @@
 # 🤖 AI Resume Parser
 
-> Intelligent resume parsing system powered by OpenAI GPT-4 and FastAPI
+> Intelligent resume parsing system powered by gemini-2.5-flash and FastAPI
 
 [![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://python.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-green.svg)](https://fastapi.tiangolo.com)
@@ -9,11 +9,13 @@
 
 ---
 
+## 📜 Link to Problem Statement: https://github.com/SahilKumar-064738/resume-parser-hackathon
+
 ## 📜 Link to ppt: https://docs.google.com/presentation/d/1vOsoOej-BFN54G2w54Faj752jUM4XfW5xwC-8onL8Lk/edit?usp=sharing
 
 ## ✨ Features
 
-- 📄 **Multi-format Support** — PDF, DOCX, TXT, and Images (with OCR)
+- 📄 **Multi-format Support** — PDF, DOCX, DOC, TXT, and Images (with OCR)-PNG, JPEG, JPG, and more
 - 🧠 **AI-Powered Extraction** — Leverages OpenAI GPT-4 for intelligent parsing
 - 🎯 **Resume-Job Matching** — Detailed scoring and compatibility analysis
 - 🚀 **RESTful API** — Complete OpenAPI documentation
