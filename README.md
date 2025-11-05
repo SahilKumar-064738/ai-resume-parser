@@ -9,6 +9,8 @@
 
 ---
 
+## 📜 Link to ppt: https://docs.google.com/presentation/d/1vOsoOej-BFN54G2w54Faj752jUM4XfW5xwC-8onL8Lk/edit?usp=sharing
+
 ## ✨ Features
 
 - 📄 **Multi-format Support** — PDF, DOCX, TXT, and Images (with OCR)
