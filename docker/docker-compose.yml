@@ -1,0 +1,41 @@
+# docker/docker-compose.yml
+version: "3.8"
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: resume_parser
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5433:5432" # host:container (optional; exposes DB to host on 5433)
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8000:8000" # host:container (maps host 8000 → container 8000)
+    env_file:
+      - ../src/.env # load your .env values into the container
+    environment:
+      # Container should connect to the DB service by hostname `db` on port 5432
+      - DATABASE_URL=postgresql://user:password@db:5432/resume_parser
+
+      # If you want to explicitly pass other critical envs here, you may add them,
+      # but they are already available via env_file (../src/.env).
+      # Example (optional):
+      # - SECRET_KEY=supersecretkey123
+      # - API_KEY=internal-api-key-456
+
+    depends_on:
+      - db
+    volumes:
+      - ../src:/app/src # development mount: host src → container src
+      - ./uploads:/app/uploads # persist uploads on host
+
+volumes:
+  postgres_data:
