@@ -1,0 +1,64 @@
+openapi: 3.0.3
+description: Not found
+delete:
+summary: Delete resume and stored file
+parameters:
+- name: id
+in: path
+required: true
+schema:
+type: string
+responses:
+'204':
+description: Deleted
+'404':
+description: Not found
+/api/v1/resumes/{id}/match:
+post:
+summary: Match a resume against a job description
+parameters:
+- name: id
+in: path
+required: true
+schema:
+type: string
+requestBody:
+required: true
+content:
+application/json:
+schema:
+$ref: '#/components/schemas/JobDescription'
+responses:
+'200':
+description: Matching results
+content:
+application/json:
+schema:
+$ref: '#/components/schemas/MatchResult'
+'400':
+description: Bad request
+'404':
+description: Resume not found
+/api/v1/resumes:
+get:
+summary: List uploaded resumes (metadata)
+parameters:
+- name: limit
+in: query
+schema:
+type: integer
+default: 50
+- name: offset
+in: query
+schema:
+type: integer
+default: 0
+responses:
+'200':
+description: List of resumes
+content:
+application/json:
+schema:
+type: array
+items:
+$ref: '#/components/schemas/ResumeMetadata'
