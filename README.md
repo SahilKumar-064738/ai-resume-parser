@@ -22,6 +22,35 @@
 
 ## 🚀 Quick Start
 
+---
+
+## ⚠️ DISCLAIMER
+
+**If the application throws any errors during startup or execution:**
+
+Clean up Docker resources and restart from scratch:
+
+```bash
+# Clean Docker system
+docker system prune -a
+
+# Clean Docker images
+docker image prune -a
+
+# Clean Docker volumes
+docker volume prune -a
+```
+
+> ⚡ **Warning:** These commands will remove **all** unused Docker resources. Make sure you don't have other important containers running.
+
+After cleanup, **re-execute from Step 1**:
+
+```bash
+./setup.sh
+```
+
+---
+
 ### Automated Setup
 
 Start the project with a single command:
