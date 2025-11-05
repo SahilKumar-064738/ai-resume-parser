@@ -22,14 +22,14 @@ cp .env.example .env
 ### 2. Run with Docker
 
 ```bash
-docker-compose up -d
+docker compose -f docker/docker-compose.yml up --build
 ```
 
 ### 3. Run Locally
 
 ```bash
 pip install -r requirements.txt
-python run.py
+python src/run.py
 ```
 
 ## API Endpoints
